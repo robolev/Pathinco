@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "ldkZRIGSreb1+tbCQKoHAojXbIKx2yaSEfgKnJqYnIMK1yFBixtWxcxnHo2o9VHd3y4SqPFtCnR1r2BANODPwQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Robert\\source\\repos\\Pathinco\\Pathinco\\Pathinco.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Robert\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
+    "C:\\Users\\Robert\\.nuget\\packages\\sfml.audio\\2.5.0\\sfml.audio.2.5.0.nupkg.sha512",
+    "C:\\Users\\Robert\\.nuget\\packages\\sfml.graphics\\2.5.0\\sfml.graphics.2.5.0.nupkg.sha512",
+    "C:\\Users\\Robert\\.nuget\\packages\\sfml.net\\2.5.0\\sfml.net.2.5.0.nupkg.sha512",
+    "C:\\Users\\Robert\\.nuget\\packages\\sfml.system\\2.5.0\\sfml.system.2.5.0.nupkg.sha512",
+    "C:\\Users\\Robert\\.nuget\\packages\\sfml.window\\2.5.0\\sfml.window.2.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
