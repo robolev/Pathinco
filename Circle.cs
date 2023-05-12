@@ -2,21 +2,30 @@
 {
     using SFML.Graphics;
     using SFML.System;
-    class Circle
-    {
-        CircleShape circle = new CircleShape(50);
+    public class Circle
+    { 
+       public CircleShape circle = new CircleShape(50);
 
-        public void SetSizesOfCircle()
+       public static List<Circle> circles = new List<Circle>();
+       public Circle(float radius, Vector2f origin, Color color)
+       {
+           circle = new CircleShape(radius)
+           {
+               Origin = origin,
+               FillColor = color 
+           };
+          circles.Add(this);
+       }
+        public static void SetPositionOfCircle(int index, Vector2f position)
         {
-            circle.Origin = new Vector2f(50, 50);
+            if (index >= 0 && index < circles.Count)
+            {
+                circles[index].circle.Position += position;
+            }
         }
-        public void SetPositionOfCircle(int x,int y)
+        public static List<Circle> GetCircles()
         {
-            circle.Position += new Vector2f(x, y);
-        }
-        public void SetColour()
-        {
-            circle.FillColor = Color.Red;
+            return circles;
         }
     }
 }
