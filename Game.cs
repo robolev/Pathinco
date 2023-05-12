@@ -14,7 +14,7 @@
             window = new RenderWindow(new VideoMode(800, 600), "Moving Circle");
             window.Closed += (sender, e) => window.Close();
 
-            circle = new Circle(50, new Vector2f(-50, 50), Color.Red);
+            circle = new Circle(50, new Vector2f(-50, 50), Color.Red);       
 
             Vector2f position = circle.circle.Position;
             Vector2f velocity = new Vector2f(2, 0); 
@@ -25,7 +25,7 @@
                 window.DispatchEvents();
                 Update(ref position, ref velocity, gravity);
                 Render(position);
-                Thread.Sleep(50);
+                Thread.Sleep(30);
             }
         }
 
@@ -33,17 +33,22 @@
         {
             velocity.Y += gravity;
 
-
             position += velocity;
 
-
-            if (position.X - circle.circle.Radius < 0 || position.X + circle.circle.Radius > window.Size.X)
+            if (position.X - circle.circle.Radius < 0)
             {
+                position.X = circle.circle.Radius; 
                 velocity.X = -velocity.X; 
+            }
+            else if (position.X + circle.circle.Radius > window.Size.X)
+            {
+                position.X = window.Size.X - circle.circle.Radius; 
+                velocity.X = -velocity.X;
             }
 
             if (position.Y + circle.circle.Radius > window.Size.Y)
             {
+                position.Y = window.Size.Y - circle.circle.Radius; 
                 velocity.Y = -velocity.Y; 
             }
         }
@@ -52,7 +57,11 @@
         {
             window.Clear();
             circle.circle.Position = position;
-            window.Draw(circle.circle);
+            foreach (var circle in Circle.GetCircles())
+            {
+                window.Draw(circle.circle);
+            }
+          //  window.Draw(circle.circle);
             window.Display();
         }
     }
