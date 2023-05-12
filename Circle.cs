@@ -3,8 +3,8 @@
     using SFML.Graphics;
     using SFML.System;
     public class Circle
-    { 
-       public CircleShape circle = new CircleShape(50);
+    {
+       public CircleShape circle = new(50);
 
        public static List<Circle> circles = new List<Circle>();
        public Circle(float radius, Vector2f origin, Color color)

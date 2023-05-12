@@ -5,7 +5,6 @@
     using SFML.Window;
     public class Game
     {
-
         private RenderWindow window;
         private Circle circle;
 
@@ -61,7 +60,6 @@
             {
                 window.Draw(circle.circle);
             }
-          //  window.Draw(circle.circle);
             window.Display();
         }
     }
