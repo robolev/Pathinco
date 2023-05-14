@@ -6,60 +6,35 @@
     public class Game
     {
         private RenderWindow window;
-        private Circle circle;
+        private Ball ball;
+
+        public Game()
+        {
+            window = new RenderWindow(new VideoMode(Config.WindowWidth, Config.WindowHeight), "Moving Circle");
+            ball = new Ball(50, new Vector2f(25, 25), Color.Red, new Vector2f(100, 100));
+            window.SetFramerateLimit(60);
+        }
 
         public void GameLoop()
         {
-            window = new RenderWindow(new VideoMode(800, 600), "Moving Circle");
             window.Closed += (sender, e) => window.Close();
-
-            circle = new Circle(50, new Vector2f(-50, 50), Color.Red);            
-
-            Vector2f position = circle.circle.Position;
-            Vector2f velocity = new Vector2f(2, 0); 
-            const float gravity = 0.5f; 
-
             while (window.IsOpen)
             {
-                window.DispatchEvents();
-                Update(ref position, ref velocity, gravity);
-                Render(position);
-                Thread.Sleep(30);
+                window.DispatchEvents();               
+                ball.Update();
+                Render();
             }
         }
 
-        private void Update(ref Vector2f position, ref Vector2f velocity, float gravity)
-        {
-            velocity.Y += gravity;
-
-            position += velocity;
-
-            if (position.X + circle.Radius < 0)
-            {
-                position.X = circle.Radius;
-                velocity.X = -velocity.X;
-            }
-            else if (position.X + circle.Radius  > window.Size.X)
-            {
-                position.X = window.Size.X - circle.Radius;
-                velocity.X = -velocity.X;
-            }
-
-            if (position.Y + circle.Radius > window.Size.Y)
-            {
-                position.Y = window.Size.Y - circle.Radius; 
-                velocity.Y = -velocity.Y; 
-            }
-        }
-
-        private void Render(Vector2f position)
+        private void Render()
         {
             window.Clear();
-            circle.circle.Position = position;
-            foreach (var circle in Circle.GetCircles())
+
+            foreach (var circle in Ball.GetCircles())
             {
-                window.Draw(circle.circle);
+                ball.Draw(window);
             }
+
             window.Display();
         }
     }
