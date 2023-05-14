@@ -13,7 +13,7 @@
             window = new RenderWindow(new VideoMode(800, 600), "Moving Circle");
             window.Closed += (sender, e) => window.Close();
 
-            circle = new Circle(50, new Vector2f(-50, 50), Color.Red);       
+            circle = new Circle(50, new Vector2f(-50, 50), Color.Red);            
 
             Vector2f position = circle.circle.Position;
             Vector2f velocity = new Vector2f(2, 0); 
@@ -34,20 +34,20 @@
 
             position += velocity;
 
-            if (position.X - circle.circle.Radius < 0)
+            if (position.X + circle.Radius < 0)
             {
-                position.X = circle.circle.Radius; 
-                velocity.X = -velocity.X; 
+                position.X = circle.Radius;
+                velocity.X = -velocity.X;
             }
-            else if (position.X + circle.circle.Radius > window.Size.X)
+            else if (position.X + circle.Radius  > window.Size.X)
             {
-                position.X = window.Size.X - circle.circle.Radius; 
+                position.X = window.Size.X - circle.Radius;
                 velocity.X = -velocity.X;
             }
 
-            if (position.Y + circle.circle.Radius > window.Size.Y)
+            if (position.Y + circle.Radius > window.Size.Y)
             {
-                position.Y = window.Size.Y - circle.circle.Radius; 
+                position.Y = window.Size.Y - circle.Radius; 
                 velocity.Y = -velocity.Y; 
             }
         }

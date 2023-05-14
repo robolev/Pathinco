@@ -5,6 +5,7 @@
     public class Circle
     {
        public CircleShape circle = new(50);
+       public float Radius { get; }
 
        public static List<Circle> circles = new List<Circle>();
        public Circle(float radius, Vector2f origin, Color color)
@@ -14,7 +15,8 @@
                Origin = origin,
                FillColor = color 
            };
-          circles.Add(this);
+           circle.Radius = 50;
+           circles.Add(this);
        }
         public static void SetPositionOfCircle(int index, Vector2f position)
         {
