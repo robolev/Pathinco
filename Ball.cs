@@ -10,7 +10,7 @@ namespace Pathinco
         public static List<Circle> balls = new List<Circle>();
 
         public Vector2f Position => circle.Position;
-        Vector2f velocity = new Vector2f(10, 0);
+        Vector2f velocity = new Vector2f(10, 1);
 
         FloatRect bounds = new FloatRect(0, 0, Config.WindowWidth, Config.WindowHeight);
 
@@ -31,16 +31,18 @@ namespace Pathinco
         {                       
             velocity.Y += gravity;
 
-            Vector2f newPosition = Position + velocity;
+            if (circle.Position.X < bounds.Left || circle.Position.X >  bounds.Width - (2 * circle.Radius))
+            {
+                velocity.X *= -1; 
+            }
+            if (circle.Position.Y < bounds.Top || circle.Position.Y >  bounds.Height - (2 * circle.Radius))
+            {
+                velocity.Y *= -1; 
+            }
 
-            if (newPosition.X < 0 || newPosition.X > bounds.Width)
-            {
-                velocity.X = -velocity.X;
-            }
-            else if(newPosition.Y < 0 || newPosition.Y > bounds.Height)
-            {
-                velocity.Y = -velocity.Y;
-            }
+            Vector2f displacement = velocity;
+            Vector2f newPosition = circle.Position + displacement;
+
             circle.Position = newPosition;
         }
         public void Draw(RenderWindow window)
