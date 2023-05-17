@@ -1,6 +1,5 @@
 ﻿using SFML.Graphics;
 using SFML.System;
-using System.Collections.Generic;
 
 namespace Pathinco
 {
@@ -18,6 +17,9 @@ namespace Pathinco
 
         private Vector2f velocity;
 
+        public float Radius { get; }
+        public Vector2f Origin { get; set; }
+
         public Vector2f Velocity
         {
             get => velocity;
@@ -32,7 +34,7 @@ namespace Pathinco
             Velocity = new Vector2f(100, 100);
             balls.Add(this);
         }
-
+      
         public static List<Ball> GetCircles()
         {
             return balls;
@@ -74,7 +76,7 @@ namespace Pathinco
             balls.Remove(this);
         }
 
-        private void CheckBallCollisions(Ball ball)
+        public void CheckBallCollisions(Ball ball)
         {
             foreach (Ball otherBall in balls)
             {
@@ -83,26 +85,19 @@ namespace Pathinco
                 if (CheckCollision(ball.circle, otherBall.circle))
                 {
                     Vector2f collisionNormal = otherBall.Position - ball.Position;
-
                    
                     float magnitude = MathF.Sqrt(collisionNormal.X * collisionNormal.X + collisionNormal.Y * collisionNormal.Y);
-
                   
                     collisionNormal /= magnitude;
-
                     
                     Vector2f relativeVelocity = otherBall.Velocity - ball.Velocity;
-
                     
                     float relativeSpeed = relativeVelocity.X * collisionNormal.X + relativeVelocity.Y * collisionNormal.Y;
-
                    
                     if (relativeSpeed > 0)
                         continue;
-
                    
                     float impulseMagnitude = -(1.0f + Elasticity) * relativeSpeed;
-
                     
                     Vector2f impulse = impulseMagnitude * collisionNormal;
 

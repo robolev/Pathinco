@@ -4,8 +4,7 @@
     using SFML.System;
     public class Circle
     {
-       public CircleShape circle = new(50);
-       public float Radius { get; }
+       public CircleShape circle = new();
 
        public Circle(float radius, Vector2f origin, Color color)
        {
@@ -14,7 +13,6 @@
                Origin = origin,
                FillColor = color 
            };
-           circle.Radius = 50;
        }
     }
 }
