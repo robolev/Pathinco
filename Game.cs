@@ -12,13 +12,14 @@
         private Time time;
         private Map map;
         private BallSpawner ballSpawner;
+        public static List<Ball> PhysicalComponents = new List<Ball>();
 
         public Game()
         {
             window = new RenderWindow(new VideoMode(Config.WindowWidth, Config.WindowHeight), "Moving Circle");
             map = new Map();
-            ball = new Ball(10, new Vector2f(25, 25), Color.Red, new Vector2f(100, 100));
-            ball1 = new Ball(10, new Vector2f(25, 25), Color.Blue, new Vector2f(600, 0));
+            ball = new Ball(10, new Vector2f(25, 25), Color.Red, new Vector2f(0, 100),true);
+            ball1 = new Ball(10, new Vector2f(25, 25), Color.Blue, new Vector2f(600, 0),true);
             window.SetFramerateLimit(60);
             time = new Time();
             ballSpawner = new BallSpawner();
@@ -35,11 +36,27 @@
                 time.Update();
                 float deltaTime = time.DeltaTime;
 
-                ball.Update(deltaTime,ball);
-                ball1.Update(deltaTime,ball1);
-                map.CheckCollisioun();
+                Update(deltaTime);
+                ColisiounUpdate();
+
                 Render();
             }
+        }
+
+        private void Update(float  deltaTime)
+        {  
+            foreach(var ball in PhysicalComponents) 
+            {
+               ball.Update(deltaTime); 
+            }         
+        }
+
+        private void ColisiounUpdate()
+        {
+            foreach (var ball in PhysicalComponents)
+            {
+                ball.CheckBallCollisions();            
+            }                        
         }
 
         private void Render()
@@ -48,13 +65,12 @@
 
             map.DrawMap(window);
 
-            foreach (var ball in Ball.GetCircles())
+            foreach (var ball in PhysicalComponents)
             {
                 ball.Draw(window);
             }
            
-            window.Display();
-            
+            window.Display();            
         }      
     }
 }

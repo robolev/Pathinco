@@ -36,25 +36,17 @@ namespace Pathinco
                 {
                     float posX = startPosition.X + col * spacingX + (row % 2 == 0 ? spacingX / 2 : 0);
                     float posY = startPosition.Y + row * spacingY;
-                    Ball ball = new Ball(radius, new Vector2f(0, 0), Color.White, new Vector2f(posX, posY)); ;
-                    balls.Add(ball);
-                    Ball.balls.Add(ball);
+                    Ball ball = new Ball(radius, new Vector2f(0, 0), Color.White, new Vector2f(posX, posY),false); 
+                    balls.Add(ball);        
                 }
             }
         }
 
         public void DrawMap(RenderWindow window)
         {
-            foreach (Ball ball in Ball.balls)
+            foreach (var ball in balls)
             {
                 ball.Draw(window);
-            }
-        }
-        public void CheckCollisioun()
-        {
-            foreach (Ball ball in balls)
-            {
-                ball.CheckBallCollisions(ball);
             }
         }
     }

@@ -1,8 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-using System;
-using System.ComponentModel;
 
 namespace Pathinco
 {
@@ -47,8 +45,8 @@ namespace Pathinco
             float angle = (float)(random.NextDouble() * 2 * Math.PI);
             Vector2f direction = new Vector2f((float)Math.Cos(angle), (float)Math.Sin(angle));
             Vector2f velocity = direction * launchSpeed;
-            Ball ball = new Ball(20f, new Vector2f(0f, 0f), Color.White, velocity);
-            Ball.balls.Add(ball);
+            Ball ball = new Ball(20f, new Vector2f(0f, 0f), Color.White, velocity,false);
+            Game.PhysicalComponents.Add(ball);
         }
     }
 }
