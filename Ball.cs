@@ -39,7 +39,6 @@ namespace Pathinco
             circle.Position = position;
             Velocity = new Vector2f(100, 100);
 
-            Game.PhysicalComponents.Add(this);
             this.movable = movable;
         }
 

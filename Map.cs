@@ -35,6 +35,7 @@ namespace Pathinco
 
                 Ball ball = new Ball(20f, new Vector2f(0f, 0f), Color.White, new Vector2f(posX, posY), false);
                 balls.Add(ball);
+                Game.PhysicalComponents.Add(ball);
             }
         }
 
