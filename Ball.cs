@@ -30,7 +30,7 @@ namespace Pathinco
 
         public  float magnitude;
 
-        const float gravity = 0.5f;
+        const float gravity = 2f;
 
         public CollisiounCheck collisioun = new CollisiounCheck();
 
