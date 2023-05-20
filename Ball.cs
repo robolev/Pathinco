@@ -68,7 +68,7 @@ namespace Pathinco
 
         private Vector2f CalculateUpdatedVelocity(float deltaTime)
         {
-            float speedMultiplier = 1.0f - deltaTime * 0.2f;
+            float speedMultiplier = 1.0f - deltaTime * 1.5f;
 
             Vector2f updatedVelocity = Velocity * speedMultiplier;
             updatedVelocity.Y += gravity;

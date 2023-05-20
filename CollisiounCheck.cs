@@ -1,15 +1,24 @@
 ﻿using SFML.Graphics;
+using SFML.System;
 
 namespace Pathinco
 {
     public class CollisiounCheck
     {
-        public bool CheckCollision(Shape shape1, Shape shape2)
+        public bool CheckCollision(CircleShape circle1, CircleShape circle2)
         {
-            var rect1 = shape1.GetGlobalBounds();
-            var rect2 = shape2.GetGlobalBounds();
+            float distance = CalculateDistance(circle1.Position, circle2.Position);
+            float sumRadii = circle1.Radius + circle2.Radius;
 
-            return rect1.Intersects(rect2);
+            return distance <= sumRadii;
+        }
+
+        private float CalculateDistance(Vector2f position1, Vector2f position2)
+        {
+            float deltaX = position2.X - position1.X + 2;
+            float deltaY = position2.Y - position1.Y + 2;
+
+            return MathF.Sqrt(deltaX * deltaX + deltaY * deltaY);
         }
     }
 }

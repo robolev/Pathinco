@@ -18,8 +18,8 @@
         {
             window = new RenderWindow(new VideoMode(Config.WindowWidth, Config.WindowHeight), "Moving Circle");
             map = new Map();
-            ball = new Ball(10, new Vector2f(25, 25), Color.Red, new Vector2f(0, 100),true);
-            ball1 = new Ball(10, new Vector2f(25, 25), Color.Blue, new Vector2f(600, 0),true);
+          //  ball = new Ball(10, new Vector2f(25, 25), Color.Red, new Vector2f(0, 100),true);
+          //  ball1 = new Ball(10, new Vector2f(25, 25), Color.Blue, new Vector2f(600, 0),true);
             window.SetFramerateLimit(60);
             time = new Time();
             ballSpawner = new BallSpawner();
@@ -33,13 +33,31 @@
             {
                 window.DispatchEvents();
 
+                HandleInput();
+
                 time.Update();
                 float deltaTime = time.DeltaTime;
-
+  
+                
                 Update(deltaTime);
                 ColisiounUpdate();
 
                 Render();
+            }
+        }
+        private void HandleInput()
+        {
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
+            {
+                ballSpawner.HandleInput(Keyboard.Key.Left);
+            }
+            else if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
+            {
+                ballSpawner.HandleInput(Keyboard.Key.Right);
+            }
+            else if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
+            {
+                ballSpawner.HandleInput(Keyboard.Key.Space);
             }
         }
 
@@ -63,8 +81,10 @@
         {
             window.Clear();
 
-            map.DrawMap(window);
+            ballSpawner.DrawSpawnPoint(window);
 
+            map.DrawMap(window);
+          
             foreach (var ball in PhysicalComponents)
             {
                 ball.Draw(window);

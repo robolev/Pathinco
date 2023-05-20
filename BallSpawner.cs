@@ -1,52 +1,48 @@
-﻿using SFML.Graphics;
+﻿using Pathinco;
+using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 
-namespace Pathinco
+public class BallSpawner
 {
-    public class BallSpawner
+    private RectangleShape spawnPointShape;
+
+    public BallSpawner()
     {
-        private Vector2f launchDirection;
-        private float launchSpeed;
-        private Random random;
+        spawnPointShape = new RectangleShape(new Vector2f(10f, 10f)) { FillColor = Color.Yellow };
+    }
 
-        public BallSpawner()
+    public void HandleInput(Keyboard.Key key)
+    {
+        if (key == Keyboard.Key.Left)
         {
-            random = new Random();
-            launchDirection = new Vector2f(1f, 0f); 
-            launchSpeed = 200f; 
+            MoveSpawnPoint(-10f, 0f);
         }
+        else if (key == Keyboard.Key.Right)
+        {
+            MoveSpawnPoint(10f, 0f);
+        }
+        else if (key == Keyboard.Key.Space)
+        {
+            Vector2f spawnPoint = spawnPointShape.Position;
+            SpawnBall(spawnPoint);
+        }
+    }
 
-        public void HandleInput(Keyboard.Key key)
-        {
-            switch (key)
-            {
-                case Keyboard.Key.Left:
-                    RotateLaunchDirection(-0.1f);
-                    break;
-                case Keyboard.Key.Right:
-                    RotateLaunchDirection(0.1f);
-                    break;
-                case Keyboard.Key.Space:
-                    SpawnBall();
-                    break;
-            }
-        }
+    private void MoveSpawnPoint(float offsetX, float offsetY)
+    {
+        Vector2f currentSpawnPoint = spawnPointShape.Position;
+        spawnPointShape.Position = currentSpawnPoint + new Vector2f(offsetX, offsetY);
+    }
 
-        private void RotateLaunchDirection(float angle)
-        {
-            float currentAngle = (float)Math.Atan2(launchDirection.Y, launchDirection.X);
-            float newAngle = currentAngle + angle;
-            launchDirection = new Vector2f((float)Math.Cos(newAngle), (float)Math.Sin(newAngle));
-        }
+    private void SpawnBall(Vector2f position)
+    {
+        Ball ball = new Ball(10f,new Vector2f (0,0), Color.Blue, position, true);
+        Game.PhysicalComponents.Add(ball);
+    }
 
-        private void SpawnBall()
-        {
-            float angle = (float)(random.NextDouble() * 2 * Math.PI);
-            Vector2f direction = new Vector2f((float)Math.Cos(angle), (float)Math.Sin(angle));
-            Vector2f velocity = direction * launchSpeed;
-            Ball ball = new Ball(20f, new Vector2f(0f, 0f), Color.White, velocity,false);
-            Game.PhysicalComponents.Add(ball);
-        }
+    public void DrawSpawnPoint(RenderWindow window)
+    {
+        window.Draw(spawnPointShape);
     }
 }
