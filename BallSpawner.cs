@@ -37,7 +37,8 @@ public class BallSpawner
 
     private void SpawnBall(Vector2f position)
     {
-        Ball ball = new Ball(10f,new Vector2f (0,0), Color.Blue, position, true);
+        Vector2f velocity = new Vector2f(100f, 0f); 
+        Ball ball = new Ball(10f,new Vector2f(0,0), Color.Blue, position, true);
         Game.PhysicalComponents.Add(ball);
     }
 

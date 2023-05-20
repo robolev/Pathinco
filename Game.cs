@@ -62,8 +62,9 @@
         }
 
         private void Update(float  deltaTime)
-        {  
-            foreach(var ball in PhysicalComponents) 
+        {
+            map.Update(deltaTime);
+            foreach (var ball in PhysicalComponents) 
             {
                ball.Update(deltaTime); 
             }         
